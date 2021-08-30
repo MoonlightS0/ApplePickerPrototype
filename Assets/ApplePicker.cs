@@ -10,7 +10,6 @@ public class ApplePicker : MonoBehaviour {
     public float         basketBottomY = -14f;
     public float         basketSpacingY = 2f;
     public List<GameObject> basketList;
-    //public int diffLevel = 1;
 
 
     // Use this for initialization
@@ -28,22 +27,22 @@ public class ApplePicker : MonoBehaviour {
     }
     public void AppleDestroyed()
     {
-        //Удалить все упавшие яблоки
+        //Remove all the fallen apples
         GameObject[] tAppleArray = GameObject.FindGameObjectsWithTag("Apple");//b
         foreach (GameObject tGO in tAppleArray)
         {
             Destroy(tGO);
         }
-        //Удалить 1 корзину
-        //Получить индекс последней корзины в basketList
+        //Delete 1 basket
+        //Get the index of the last basket in the basketList
         int basketIndex = basketList.Count - 1;
-        //Получить ссылку на этот игровой объект Basket
+        //Get a link to this game object Basket
         GameObject tBasketGo = basketList[basketIndex];
-        //Исключить корзину из списка и удалить сам игровой объект
+        //Exclude the basket from the list and delete the game object itself
         basketList.RemoveAt(basketIndex);
         Destroy(tBasketGo);
 
-        //Если корзин не осталось,выход в меню
+        //If there are no buckets left, exit the menu
         if (basketList.Count == 0)
         {
             SceneManager.LoadScene("_Scene_0_MainMenu");
