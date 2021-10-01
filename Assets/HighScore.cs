@@ -4,28 +4,28 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class HighScore : MonoBehaviour {
-    static public int score = 650;
+    static public int score = 650;      //static public required for read score and work with him.
     private void Awake()
     {
-     //Если значение HighScore уже существует в PlayerPrefs,прочитать его
+        //If the HighScore value already exists in PlayerPrefs, read it
         if (PlayerPrefs.HasKey("HighScore"))
         {
             score = PlayerPrefs.GetInt("HighScore");
         }
-        //Сохранить высшее достижение HighScore в хранилище
+        //Save the highest achievement of HighScore to the repository in Unity
         PlayerPrefs.SetInt("HighScore", score);
         Debug.Log("New High Score writed!");
     }
     // Use this for initialization
-    void Start () {
-		
-	}
+    void Start()
+    {
+    }
 	
 	// Update is called once per frame
 	void Update () {
         Text gt = this.GetComponent<Text>();
         gt.text = "High Score: " + score;
-        //Обновить HighScore в PlayerPrefs,если необходимо
+        //Update HighScore in PlayerPrefs, if necessary
         if (score > PlayerPrefs.GetInt("HighScore"))
         {
             PlayerPrefs.SetInt("HighScore", score);
