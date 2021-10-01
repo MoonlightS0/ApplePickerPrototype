@@ -6,27 +6,27 @@ using UnityEngine.SceneManagement;
 
 public class MenuControls : MonoBehaviour
 {
-    public void PlayPressed()                           //Turn on 1 scene.
+    public void PlayPressed()
     {
         SceneManager.LoadScene("_Scene_1_Game");
         Debug.Log("Game pressed!");
     }
 
-    public void ExitPressed()                           //Close application
+    public void ExitPressed()
     {
         Application.Quit();
         Debug.Log("Exit pressed!");
     }
-    public bool paused;                                   //Variable for pause game.
+    public bool paused;                                   //Переменая для паузы игры.
     public void Update()
 
     {
-        if (Input.GetKeyDown(KeyCode.Escape))            //Pressing esc causes the exit to the menu
+        if (Input.GetKeyDown(KeyCode.Escape))            //Нажатие на esc вызывает выход в меню
         {
             SceneManager.LoadScene("_Scene_0_MainMenu");                
             Debug.Log("Menu pressed!");
         }
-        else if (Input.GetKeyDown(KeyCode.P))           //Pressing P causes a pause,there are problems with the active bucket during the pause.
+        else if (Input.GetKeyDown(KeyCode.P))           //Нажатие на P вызывает паузу,имеется проблемы с активной корзиной во время паузы.
             if (!paused)
                         {
                             Time.timeScale = 0;

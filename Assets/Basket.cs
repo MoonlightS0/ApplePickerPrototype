@@ -10,14 +10,14 @@ public class Basket : MonoBehaviour {
 
     void Start()
     {
-        // Get a link to the ScoreCounter game object
+        // Получить ссылку на игровой объект ScoreCounter
         GameObject scoreGO = GameObject.Find("ScoreCounter");
-        // Get the Text component of this game object
+        // Получить компонент Text этого игрового объекта
         scoreGT = scoreGO.GetComponent<Text>(); // с
-        //Set the initial number of points to 0
+        //Установить начальное число очков равным 0
         scoreGT.text = "0";
 
-        int diffLevel = DropDownHandler.diffValue;                  //From the DropDownHandler class, the difficulty is taken from the diffValue variable and assigned to a new local variable that will be used in if/else
+        int diffLevel = DropDownHandler.diffValue;                  //Из класса DropDownHandler из переменной diffValue берётся сложность и присваевается новой локальной переменной которая и будет использоваться в if/else
         if (diffLevel == 0)                                         //easy difficulty
         {
             transform.localScale = new Vector3(10f, 1f, 4f);
@@ -39,33 +39,34 @@ public class Basket : MonoBehaviour {
 
     // Update is called once per frame
     void Update()
-    {
-        // Get the current coordinates of the mouse pointer on the screen from Input
+    { // Получить текущие координаты указателя мыши на экране из Input 
         Vector3 mousePos2D = Input.mousePosition;
-        // The camera's Z coordinate determines how far away the mouse pointer is in three-dimensional space
+        // Координата Z камеры определяет, как далеко в трехмерном пространстве 
+        // находится указатель мыши 
         mousePos2D.z = -Camera.main.transform.position.z;
-        // Convert a point on the two-dimensional plane of the screen to the three-dimensional coordinates of the game
+        // Преобразовать точку на двумерной плоскости экрана в трехмерные 
+        // координаты игры 
         Vector3 mousePos3D = Camera.main.ScreenToWorldPoint( mousePos2D );
-        // Move the bucket along the X axis to the X coordinate of the mouse pointer
+        // Переместить корзину вдоль оси X в координату X указателя мыши 
         Vector3 pos = this.transform.position; pos.x = mousePos3D.x; this.transform.position = pos;
     }
     private void OnCollisionEnter(Collision coll)
     {
-        //Find an apple that got into the basket
+        //Отыскать яблоко,попавшее в корзину
         GameObject collidedWith = coll.gameObject;
         if (collidedWith.tag == "Apple")
         {
             Destroy(collidedWith);
 
 
-            // Convert text to scoreGT to an integer
-            int score = int.Parse(scoreGT.text);
-            // Add points for catching an apple
+            // Преобразовать текст в scoreGT в целое число
+            int score = int.Parse(scoreGT.text); 
+            // Добавить очки за пойманное яблоко
             score += 10;
-            // Convert the number of points back to a string and display it on the screen
+            // Преобразовать число очков обратно в строку и вывести ее на экран
             scoreGT.text = score.ToString();
 
-            //Remember the highest achievement
+            //Запомнить высшее достижение
             if (score > HighScore.score)
             {
                 HighScore.score = score;
