@@ -11,6 +11,7 @@ public class DropDownHandler : MonoBehaviour   //A class that extends the capabi
 
     private void Start()
     {
+        if (ddgamediff != null)
         ddgamediff.onValueChanged.AddListener(delegate
         {
             ddgamediffValueChangedHappened(ddgamediff);
